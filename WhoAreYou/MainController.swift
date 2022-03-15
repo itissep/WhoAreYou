@@ -8,6 +8,8 @@
 import UIKit
 
 class MainController: UIViewController {
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +30,6 @@ class MainController: UIViewController {
         view.addSubview(labelForSearch)
         view.addSubview(textField)
         view.addSubview(searchButton)
-        
         
         
         // labelForSearch constraints
@@ -74,6 +75,7 @@ class MainController: UIViewController {
         return imageView
     }()
     
+    
     lazy var searchButton: UIButton = {
         let button = UIButton()
         button.setTitle("Go", for: .normal)
@@ -83,13 +85,17 @@ class MainController: UIViewController {
         button.backgroundColor = .systemRed
         button.layer.cornerRadius = 16
         
-        
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
     @objc private func buttonAction(){
         print("wow")
+        let infoController = InformationVController()
+        infoController.age = "35"
+        infoController.gender = "no-gender"
+        infoController.nationality = "national"
+        self.present(infoController, animated: true, completion: nil)
     }
     
     
@@ -105,6 +111,7 @@ class MainController: UIViewController {
         return labelForSearch
     }()
     
+    
     lazy var titleLabel: UILabel = {
         let titleLabel = UILabel()
         titleLabel.text = "Who are you?"
@@ -112,6 +119,7 @@ class MainController: UIViewController {
         titleLabel.textColor = .systemRed
         titleLabel.font = UIFont.boldSystemFont(ofSize: 35.0)
         titleLabel.textAlignment = .center
+        
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         return titleLabel
     }()
