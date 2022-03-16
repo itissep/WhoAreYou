@@ -9,11 +9,18 @@ import UIKit
 
 class MainController: UIViewController {
     
+    var ageManager = AgeManager()
+    var genderManager = GenderManager()
     
-
+//    let infoController = InformationVController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        
+//        ageManager.delegate = self
+//        genderManager.delegate = self
+        nameInput.delegate = self
         
         setupKeyboardHiding()
         self.hideKeyboardWhenTappedAround()
@@ -28,30 +35,30 @@ class MainController: UIViewController {
         
         view.addSubview(titleLabel)
         view.addSubview(labelForSearch)
-        view.addSubview(textField)
+        view.addSubview(nameInput)
         view.addSubview(searchButton)
         
         
         // labelForSearch constraints
         NSLayoutConstraint.activate([
             labelForSearch.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            labelForSearch.centerYAnchor.constraint(equalTo: textField.topAnchor, constant: -60),
+            labelForSearch.centerYAnchor.constraint(equalTo: nameInput.topAnchor, constant: -60),
             labelForSearch.widthAnchor.constraint(equalToConstant: 250),
             labelForSearch.heightAnchor.constraint(equalToConstant: 50),
         ])
         
         // textField constraints
         NSLayoutConstraint.activate([
-            textField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            textField.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            textField.widthAnchor.constraint(equalToConstant: 350),
-            textField.heightAnchor.constraint(equalToConstant: 50),
+            nameInput.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            nameInput.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            nameInput.widthAnchor.constraint(equalToConstant: 350),
+            nameInput.heightAnchor.constraint(equalToConstant: 50),
         ])
         
         // searchButton constraints
         NSLayoutConstraint.activate([
             searchButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            searchButton.centerYAnchor.constraint(equalTo: textField.bottomAnchor, constant: 50),
+            searchButton.centerYAnchor.constraint(equalTo: nameInput.bottomAnchor, constant: 50),
             searchButton.widthAnchor.constraint(equalToConstant: 350),
             searchButton.heightAnchor.constraint(equalToConstant: 50),
         ])
@@ -89,14 +96,7 @@ class MainController: UIViewController {
         return button
     }()
     
-    @objc private func buttonAction(){
-        print("wow")
-        let infoController = InformationVController()
-        infoController.age = "35"
-        infoController.gender = "no-gender"
-        infoController.nationality = "national"
-        self.present(infoController, animated: true, completion: nil)
-    }
+
     
     
     lazy var labelForSearch: UILabel = {
@@ -125,7 +125,7 @@ class MainController: UIViewController {
     }()
     
     
-    lazy var textField: UITextField = {
+    lazy var nameInput: UITextField = {
         let textField = UITextField()
         
         textField.attributedPlaceholder = NSAttributedString(string: "your name", attributes: [NSAttributedString.Key.foregroundColor: #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 0.2459555462)])
@@ -136,6 +136,8 @@ class MainController: UIViewController {
         textField.layer.cornerRadius = 16
         textField.clearButtonMode = .whileEditing
         textField.textColor = .systemRed
+        
+        textField.autocorrectionType = .no
         
         textField.translatesAutoresizingMaskIntoConstraints = false
         
@@ -200,4 +202,41 @@ extension MainController {
     @objc func keyboardWillHide(sender: NSNotification) {
         view.frame.origin.y = 0
     }
+}
+
+
+
+extension MainController: UITextFieldDelegate {
+
+    @objc private func buttonAction(){
+        nameInput.endEditing(true)
+        
+//        let infoController = InformationVController()
+//
+//        if let name = nameInput.text {
+//            infoController.name = name
+//        }
+//        self.present(infoController, animated: true, completion: nil)
+    }
+
+        
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        let infoController = InformationVController()
+        
+        if let name = nameInput.text {
+            infoController.name = name
+        }
+        self.present(infoController, animated: true, completion: nil)
+        nameInput.text = ""
+    }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        if nameInput.text != "" {
+            return true
+        } else {
+            nameInput.placeholder = "I need name"
+            return false
+        }
+    }
+
 }

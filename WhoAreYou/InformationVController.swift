@@ -9,22 +9,34 @@ import UIKit
 
 class InformationVController: UIViewController {
     
-    var age: String?
-    var gender: String?
-    var nationality: String?
+    var name: String?
     
-    var labelArray: [UILabel]?
+    var genderManager = GenderManager()
+    var ageManager = AgeManager()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         
-
-        
         layout()
-
         
+        if let name = name {
+            genderManager.fetchGender(name: name) { gender in
+                DispatchQueue.main.async {
+                    self.genderLabel.text = "Your gender is \(gender.gender)."
+                }
+            }
+            
+            ageManager.fetchAge(name: name) { age in
+                DispatchQueue.main.async {
+                    self.ageLabel.text = "You are \(age.age) years old."
+                }
+            }
+        }
     }
+    
+    
     //MARK: - Layout
     
     private func layout(){
@@ -38,18 +50,15 @@ class InformationVController: UIViewController {
             titleLabel.heightAnchor.constraint(equalToConstant: 50),
         ])
         
-        
-
-        let stackView = stackViewMaker(labelsArray: makeArrayOfLabels())
-        
+    
+        let stackView = stackViewMaker()
         view.addSubview(stackView)
-        
+
         // stackView constraints
         NSLayoutConstraint.activate([
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             stackView.centerYAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 50),
             stackView.widthAnchor.constraint(equalToConstant: 200),
-//            stackView.heightAnchor.constraint(equalToConstant: 500),
         ])
         
         view.addSubview(resetBtn)
@@ -61,10 +70,8 @@ class InformationVController: UIViewController {
             resetBtn.widthAnchor.constraint(equalToConstant: 200),
             resetBtn.heightAnchor.constraint(equalToConstant: 50),
         ])
-        
-        
-        
     }
+    
     
     lazy var titleLabel: UILabel = {
         let titleLabel = UILabel()
@@ -90,19 +97,12 @@ class InformationVController: UIViewController {
         return label
     }
 
-    private func makeArrayOfLabels() -> [UILabel]{
-        var array = [UILabel]()
-        
-        guard let age = age, let nationality = nationality, let gender = gender else { return [] }
-        
-        array.append(makeInfoLabel(text: "You are \(age) years old."))
-        array.append(makeInfoLabel(text: "You are \(nationality)."))
-        array.append(makeInfoLabel(text: "Your gender is \(gender)."))
-        return array
-    }
     
-    private func stackViewMaker(labelsArray: [UILabel])-> UIStackView{
-        let stackView = UIStackView(arrangedSubviews: labelsArray)
+    lazy var ageLabel: UILabel = makeInfoLabel(text: "")
+    lazy var genderLabel: UILabel = makeInfoLabel(text: "Some gender")
+    
+    private func stackViewMaker()-> UIStackView{
+        let stackView = UIStackView(arrangedSubviews: [genderLabel, ageLabel])
         stackView.axis = .vertical
         
         stackView.distribution = .fillEqually
@@ -113,8 +113,6 @@ class InformationVController: UIViewController {
         return stackView
     }
 
-    
-    
     
     lazy var resetBtn: UIButton = {
         let button = UIButton()
@@ -130,13 +128,12 @@ class InformationVController: UIViewController {
         return button
     }()
     
+    
     @objc private func buttonReset() {
         self.dismiss(animated: true, completion: nil)
     }
-     
-     
-     
-     
-
 
 }
+
+
+

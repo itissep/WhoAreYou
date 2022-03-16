@@ -13,6 +13,8 @@
 		2CD23EB327DFBB9400EDD23B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CD23EB127DFBB9400EDD23B /* LaunchScreen.storyboard */; };
 		2CD23EBC27E0A00E00EDD23B /* UIResponder + Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD23EBB27E0A00E00EDD23B /* UIResponder + Utils.swift */; };
 		2CD23EC027E0C6F500EDD23B /* InformationVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD23EBF27E0C6F500EDD23B /* InformationVController.swift */; };
+		2CD23EC227E0DAE500EDD23B /* AgeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD23EC127E0DAE500EDD23B /* AgeManager.swift */; };
+		2CD23EC427E1083600EDD23B /* GenderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD23EC327E1083600EDD23B /* GenderManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		2CD23EB427DFBB9400EDD23B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2CD23EBB27E0A00E00EDD23B /* UIResponder + Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIResponder + Utils.swift"; sourceTree = "<group>"; };
 		2CD23EBF27E0C6F500EDD23B /* InformationVController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationVController.swift; sourceTree = "<group>"; };
+		2CD23EC127E0DAE500EDD23B /* AgeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeManager.swift; sourceTree = "<group>"; };
+		2CD23EC327E1083600EDD23B /* GenderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +61,8 @@
 			isa = PBXGroup;
 			children = (
 				2CD23EA627DFBB9200EDD23B /* AppDelegate.swift */,
+				2CD23EC127E0DAE500EDD23B /* AgeManager.swift */,
+				2CD23EC327E1083600EDD23B /* GenderManager.swift */,
 				2CD23EAA27DFBB9200EDD23B /* MainController.swift */,
 				2CD23EBF27E0C6F500EDD23B /* InformationVController.swift */,
 				2CD23EBA27E09FDB00EDD23B /* Utils */,
@@ -145,7 +151,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CD23EC427E1083600EDD23B /* GenderManager.swift in Sources */,
 				2CD23EAB27DFBB9200EDD23B /* MainController.swift in Sources */,
+				2CD23EC227E0DAE500EDD23B /* AgeManager.swift in Sources */,
 				2CD23EA727DFBB9200EDD23B /* AppDelegate.swift in Sources */,
 				2CD23EBC27E0A00E00EDD23B /* UIResponder + Utils.swift in Sources */,
 				2CD23EC027E0C6F500EDD23B /* InformationVController.swift in Sources */,
