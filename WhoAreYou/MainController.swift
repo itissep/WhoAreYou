@@ -12,14 +12,10 @@ class MainController: UIViewController {
     var ageManager = AgeManager()
     var genderManager = GenderManager()
     
-//    let infoController = InformationVController()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         
-//        ageManager.delegate = self
-//        genderManager.delegate = self
         nameInput.delegate = self
         
         setupKeyboardHiding()
@@ -74,7 +70,6 @@ class MainController: UIViewController {
     }
 
 
-
     lazy var imageView: UIImageView = {
         let image = UIImage(systemName: "phone")
         let imageView = UIImageView(image: image)
@@ -95,8 +90,6 @@ class MainController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-    
-
     
     
     lazy var labelForSearch: UILabel = {
@@ -148,8 +141,6 @@ class MainController: UIViewController {
         return textField
     }()
 }
-
-
 
 
 
@@ -210,13 +201,6 @@ extension MainController: UITextFieldDelegate {
 
     @objc private func buttonAction(){
         nameInput.endEditing(true)
-        
-//        let infoController = InformationVController()
-//
-//        if let name = nameInput.text {
-//            infoController.name = name
-//        }
-//        self.present(infoController, animated: true, completion: nil)
     }
 
         

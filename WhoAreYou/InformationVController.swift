@@ -22,14 +22,14 @@ class InformationVController: UIViewController {
         layout()
         
         if let name = name {
-            genderManager.fetchGender(name: name) { gender in
+            genderManager.fetchGender(name: name) { (gender) in
                 DispatchQueue.main.async {
                     self.genderLabel.text = "Your gender is \(gender.gender)."
                     self.spinner.stopAnimating()
                 }
             }
             
-            ageManager.fetchAge(name: name) { age in
+            ageManager.fetchAge(name: name) { (age) in
                 DispatchQueue.main.async {
                     self.ageLabel.text = "You are \(age.age) years old."
                     self.spinner.stopAnimating()

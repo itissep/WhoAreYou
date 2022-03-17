@@ -5,7 +5,7 @@
 //  Created by The GORDEEVS on 15.03.2022.
 //
 
-import Foundation
+import UIKit
 
 struct GenderManager {
     
