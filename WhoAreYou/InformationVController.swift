@@ -25,12 +25,14 @@ class InformationVController: UIViewController {
             genderManager.fetchGender(name: name) { gender in
                 DispatchQueue.main.async {
                     self.genderLabel.text = "Your gender is \(gender.gender)."
+                    self.spinner.stopAnimating()
                 }
             }
             
             ageManager.fetchAge(name: name) { age in
                 DispatchQueue.main.async {
                     self.ageLabel.text = "You are \(age.age) years old."
+                    self.spinner.stopAnimating()
                 }
             }
         }
@@ -66,12 +68,35 @@ class InformationVController: UIViewController {
         // resetBtn constraints
         NSLayoutConstraint.activate([
             resetBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            resetBtn.centerYAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 50),
+            resetBtn.centerYAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 150),
             resetBtn.widthAnchor.constraint(equalToConstant: 200),
             resetBtn.heightAnchor.constraint(equalToConstant: 50),
         ])
+        
+        view.addSubview(spinner)
+        
+        // spinner constraints
+        NSLayoutConstraint.activate([
+            spinner.centerXAnchor.constraint(equalTo: titleLabel.centerXAnchor),
+            spinner.centerYAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 50),
+            spinner.widthAnchor.constraint(equalToConstant: 100),
+            spinner.heightAnchor.constraint(equalToConstant: 100),
+        ])
+        spinner.startAnimating()
+        
+        
     }
     
+    
+    lazy var spinner: UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView()
+        
+        spinner.style = .large
+        spinner.hidesWhenStopped = true
+        
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        return spinner
+    }()
     
     lazy var titleLabel: UILabel = {
         let titleLabel = UILabel()
@@ -92,6 +117,7 @@ class InformationVController: UIViewController {
         label.text = msg
         label.numberOfLines = 0
         label.textColor = .systemGray
+        label.textAlignment = .center
         
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -99,7 +125,7 @@ class InformationVController: UIViewController {
 
     
     lazy var ageLabel: UILabel = makeInfoLabel(text: "")
-    lazy var genderLabel: UILabel = makeInfoLabel(text: "Some gender")
+    lazy var genderLabel: UILabel = makeInfoLabel(text: "")
     
     private func stackViewMaker()-> UIStackView{
         let stackView = UIStackView(arrangedSubviews: [genderLabel, ageLabel])
